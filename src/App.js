@@ -1,28 +1,31 @@
 import React, { useState } from "react";
 import "./App.css";
+import { evaluate } from "mathjs";
+
 
 function App() {
   const [input, setInput] = useState("");
 
-  // Handle button click
+  // ✅ Button click
   const handleClick = (value) => {
-    setInput(input + value);
+    setInput((prev) => prev + value);
   };
 
-  // Clear input
+  // ✅ Clear
   const clearInput = () => {
     setInput("");
   };
 
-  // Calculate result
+  // ✅ Calculate
   const calculate = () => {
     try {
-      const result = Function("return " + input)();
+      const result = evaluate(input);
       setInput(result.toString());
-    } catch (error) {
+    } catch {
       setInput("Error");
     }
   };
+
   return (
     <div className="container">
       <h1>Calculator</h1>
